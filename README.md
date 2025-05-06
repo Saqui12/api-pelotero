@@ -54,13 +54,12 @@ This RESTful API was developed as a personal project to manage an entertainment 
 
 ## 📚 Status & Future Improvements
 
--Employees Managment
--Frontend (in progress)
--Deployment
-
+- Employees Managment.
+- Frontend.
+- Deployment.
 
 ### Author
 
-Junior .NET Developer | Electromechanical Engineer
+ Junior .NET Developer | Electromechanical Engineer
 
-LinkedIn https://www.linkedin.com/in/manuel-nunez12/
+ LinkedIn https://www.linkedin.com/in/manuel-nunez12/
