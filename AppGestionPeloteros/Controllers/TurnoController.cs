@@ -1,10 +1,12 @@
 ﻿using Application.Services.DTOs;
 using Application.Services.Iterfaces;
 using Dominio.Models.Parameters;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AppGestionPeloteros.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class TurnoController(ITurnoService _service) : Controller
     {

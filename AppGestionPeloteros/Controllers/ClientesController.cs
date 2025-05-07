@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AppGestionPeloteros.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
-    //[Authorize(Roles ="Employee")]
     public class ClientesController(IClientesService _service) : Controller
     {
         

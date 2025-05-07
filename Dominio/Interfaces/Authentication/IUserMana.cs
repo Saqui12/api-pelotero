@@ -12,5 +12,6 @@ namespace Dominio.Interfaces.Authentication
         Task<IEnumerable<AppUser>> GetAllUsers();
         Task<bool> DeleteUserByEmail(string email);
         Task<List<Claim>> GetUserClaims(string email);
+        Task<AppUser> UpdateUser(AppUser user);
     }
 }

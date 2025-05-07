@@ -6,6 +6,7 @@ using Application.Services.Validators.Iterface;
 using Dominio.Entities.Identity;
 using Dominio.Interfaces.Authentication;
 using FluentAssertions;
+using FluentValidation;
 using MapsterMapper;
 using Moq;
 using System.Security.Claims;
@@ -22,6 +23,8 @@ namespace Test.AppGestionPeloteros.UnitTest.Services
         private readonly Mock<IAppLogger<AuthenticationService>> _loggerMock = new();
         private readonly Mock<IMapper> _mapperMock = new();
         private readonly Mock<IValidationService> _validatorMock = new();
+        private readonly Mock<IValidator<CreateUser>> _userValidatorMock = new();
+        private readonly Mock<IValidator<UpdateUser>> _updateUserValidatorMock = new();
         private readonly AuthenticationService _service;
 
         public AuthenticationServiceTests()
@@ -33,7 +36,8 @@ namespace Test.AppGestionPeloteros.UnitTest.Services
                 _loggerMock.Object,
                 _mapperMock.Object,
                 _validatorMock.Object,
-                null // Puedes agregar más mocks según sea necesario
+                _userValidatorMock.Object,
+                _updateUserValidatorMock.Object
             );
         }
 
