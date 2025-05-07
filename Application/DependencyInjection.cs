@@ -27,12 +27,16 @@ namespace Application
             services.AddScoped<IValidator<TurnoCreationDto>, TurnoCreation>();
             services.AddScoped<IValidator<PagoCreationDto>, PagoCreation>();
             services.AddScoped<IValidator<CreateUser>, CreationUser>();
+            services.AddScoped<IValidator<UpdateUser>, UpdateUserCreation>();
             services.AddScoped<IValidationService, ValidationService>();
 
-          
-
-
             services.AddScoped<ITurnoService, TurnoService>();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IPagosService, PagoService>();
+            services.AddScoped<IClientesService, ClienteService>();
+            services.AddScoped<IRecursoServices, RecursoServices>();
+            services.AddScoped<IBloqueoServices, BloqueoService>();
+
             return services;
         }
     }

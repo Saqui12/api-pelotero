@@ -9,5 +9,8 @@ namespace Application.Services.Iterfaces
         Task<LoginResponse> Login(LoginUser loginUser);
         Task<LoginResponse> RenewToken( string refreshToken);
         Task<ServiceResponse> DeleteUser(string email);
+        Task<ServiceResponseData> Update(UpdateUser updateUser);
+        Task<ServiceResponseData> GetByEmail(string email);
+       
     }
 }

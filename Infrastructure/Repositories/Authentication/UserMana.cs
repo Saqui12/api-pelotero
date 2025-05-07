@@ -7,22 +7,22 @@ using System.Security.Claims;
 
 namespace Infrastructure.Repositories.Authentication
 {
-    public class UserMana(UserManager<AppUser> usermanager,IRoleMana rolemanager,PeloterosDbContext context ) : IUserMana
+    public class UserMana(UserManager<AppUser> usermanager, IRoleMana rolemanager, PeloterosDbContext context) : IUserMana
     {
         public async Task<bool> CreateUser(AppUser user)
         {
             AppUser? _user = await GetUserByEmail(user.Email!);
             if (_user != null)
-                 throw new ArgumentException("User already exists");
+                throw new ArgumentException("User already exists");
 
             return (await usermanager.CreateAsync(user!, user!.PasswordHash!)).Succeeded;
         }
         public async Task<IEnumerable<AppUser>> GetAllUsers() => await usermanager.Users.ToListAsync();
-       
+
         public async Task<AppUser?> GetUserByEmail(string email) => await usermanager.FindByEmailAsync(email);
 
         public async Task<AppUser> GetUserById(string id) => await usermanager.FindByIdAsync(id);
-        
+
         public async Task<List<Claim>> GetUserClaims(string email)
         {
             var user = await GetUserByEmail(email);
@@ -38,11 +38,24 @@ namespace Infrastructure.Repositories.Authentication
         public async Task<bool> DeleteUserByEmail(string email)
         {
             var user = await usermanager.FindByEmailAsync(email);
-               if (user is null)
+            if (user is null)
                 return false;
-           
+
             return (await usermanager.DeleteAsync(user)).Succeeded;
-            
+
+        }
+        public async Task<AppUser> UpdateUser(AppUser user)
+        {
+            var _user = await GetUserByEmail(user.Email!);
+            if (_user is null)
+                throw new ArgumentException("User not found");
+
+            _user.FullName = user.FullName;
+            _user.PhoneNumber = user.PhoneNumber;
+            _user.UserName = user.UserName;
+            _user.NormalizedUserName = user.NormalizedUserName;
+            _user.NormalizedEmail = user.NormalizedEmail;
+            return (await usermanager.UpdateAsync(_user)).Succeeded ? _user : null!;
         }
 
         public async Task<bool> LoginUser(AppUser user)
@@ -55,7 +68,11 @@ namespace Infrastructure.Repositories.Authentication
             if (Rolename is null) return false;
 
             return await usermanager.CheckPasswordAsync(_user, user!.PasswordHash!);
-            
+
+        }
+        public async Task<AppUser> UpdateUserAsync(AppUser user)
+        {
+            return (await usermanager.UpdateAsync(user)).Succeeded ? user : null!;
         }
     }
 }

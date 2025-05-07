@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.ComponentModel.DataAnnotations;
@@ -39,12 +40,13 @@ namespace Infrastructure.Middelware
                     _ => 500 // Default to 500 for other exceptions
                 };
 
-            var response = new
+            ProblemDetails response = new()
             {
 
-                context.Response.StatusCode,
-                Message = "An error occurred while processing your request.",
-                Details = exception.Message 
+                Status =context.Response.StatusCode,
+                Type=exception.GetType().Name,
+                Title = "An error occurred while processing your request.",
+                Detail = exception.Message 
             };
             // Return a generic error message
              await context.Response.WriteAsync(JsonSerializer.Serialize(response));

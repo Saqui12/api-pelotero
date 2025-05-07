@@ -1,5 +1,4 @@
-﻿using Application.Services.Implementation;
-using Application.Services.Iterfaces;
+﻿using Application.Services.Iterfaces;
 using Dominio.Interfaces;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
@@ -31,13 +30,12 @@ namespace Infrastructure
             services.AddScoped<IHorariosDisponibilidadRepository, HorariosDisponiblesRespository>();
             services.AddScoped<IRepositoryManager, RepositoryManager>();
             services.AddScoped<IPagosRepository, PagosRepository>();
-            services.AddScoped<IPagosService, PagoService>();
-            services.AddScoped<IClientesService, ClienteService>();
+
 
             services.AddScoped<IRoleMana, RoleMana>();
             services.AddScoped<ITokenMana, TokenMana>();
             services.AddScoped<IUserMana, UserMana>();
-            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            
 
             services.AddScoped(typeof(IAppLogger<>), typeof(Serilogger<>));
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));

@@ -1,5 +1,6 @@
 ﻿using Application.Services.DTOs.User;
 using Application.Services.Iterfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AppGestionPeloteros.Controllers
@@ -30,6 +31,7 @@ namespace AppGestionPeloteros.Controllers
             }
             return BadRequest(result);
         }
+        [Authorize]
         [HttpGet("RefreshToken/{refreshToken}")]
         public async Task<IActionResult> RefreshToken(string refreshToken)
         {
@@ -41,11 +43,36 @@ namespace AppGestionPeloteros.Controllers
             }
             return BadRequest(result);
         }
-        [HttpDelete("DeleteUser/{email}")]
+        [HttpDelete("{email}")]
+        [Authorize("Admin")]
         public async Task<IActionResult> DeleteUser(string email)
         {
             // Call the authentication service to perform user deletion
             var result = await _service.DeleteUser(email);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpGet("{email}")]
+        [Authorize("Admin")]
+        public async Task<IActionResult> GetUserByEmail(string email)
+        {
+            // Call the authentication service to get user details
+            var result = await _service.GetByEmail(email);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpPut]
+        [Authorize]
+        public async Task<IActionResult> UpdateUser([FromBody] UpdateUser updateUser)
+        {
+            // Call the authentication service to perform user update
+            var result = await _service.Update(updateUser);
             if (result.Success)
             {
                 return Ok(result);
