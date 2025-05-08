@@ -31,7 +31,7 @@ namespace AppGestionPeloteros.Controllers
             }
             return BadRequest(result);
         }
-        [Authorize]
+        //[Authorize]
         [HttpGet("RefreshToken/{refreshToken}")]
         public async Task<IActionResult> RefreshToken(string refreshToken)
         {
@@ -44,7 +44,7 @@ namespace AppGestionPeloteros.Controllers
             return BadRequest(result);
         }
         [HttpDelete("{email}")]
-        [Authorize("Admin")]
+       //[Authorize("Admin")]
         public async Task<IActionResult> DeleteUser(string email)
         {
             // Call the authentication service to perform user deletion
@@ -56,7 +56,7 @@ namespace AppGestionPeloteros.Controllers
             return BadRequest(result);
         }
         [HttpGet("{email}")]
-        [Authorize("Admin")]
+        //[Authorize("Admin")]
         public async Task<IActionResult> GetUserByEmail(string email)
         {
             // Call the authentication service to get user details
@@ -68,7 +68,7 @@ namespace AppGestionPeloteros.Controllers
             return BadRequest(result);
         }
         [HttpPut]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> UpdateUser([FromBody] UpdateUser updateUser)
         {
             // Call the authentication service to perform user update
