@@ -1,19 +1,21 @@
 ﻿using Application.Services.DTOs.Cliente;
 using Application.Services.Iterfaces;
+using Dominio.Models.Parameters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AppGestionPeloteros.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     public class ClientesController(IClientesService _service) : Controller
     {
         
+
         [HttpGet]
-        public async Task<IActionResult> GetClientes()
+        public async Task<IActionResult> GetClientesFilter([FromQuery] ClientesParameters param)
         {
-            var clientes = await _service.GetAllAsync();
+            var clientes = await _service.GetAllFilterAsync(param);
             return Ok(clientes);
         }
         [HttpPost]

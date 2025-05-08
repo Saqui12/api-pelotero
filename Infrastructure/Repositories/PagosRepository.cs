@@ -24,7 +24,7 @@ namespace Infrastructure.Repositories
             if(!string.IsNullOrEmpty(param.Estado))
                 query = query.Where(x => x.Estado == param.Estado);
 
-            //  query = query.Where(x => x.FechaPago >= param.FechaDesde && x.FechaPago <= param.FechaHasta);
+           //   query = query.Where(x => x.FechaPago >= param.FechaDesde && x.FechaPago <= param.FechaHasta);
 
             return await query.AsNoTracking()              
                 .OrderByDescending(p => p.FechaPago)

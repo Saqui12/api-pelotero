@@ -63,7 +63,7 @@ using (var scope = app.Services.CreateScope())
     var db = scope.ServiceProvider.GetRequiredService<PeloterosDbContext>();
     if (db.Database.IsRelational()) // Check if a relational provider is used
     {
-        db.Database.Migrate();
+       // db.Database.Migrate();
     }
 }
 

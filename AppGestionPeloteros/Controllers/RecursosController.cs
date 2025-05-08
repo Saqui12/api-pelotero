@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AppGestionPeloteros.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    //[Authorize(Roles ="Admin")]
     [Route("api/[controller]")]
     public class RecursosController(IRecursoServices _service) : Controller
     {

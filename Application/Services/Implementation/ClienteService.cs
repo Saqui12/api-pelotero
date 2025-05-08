@@ -3,6 +3,7 @@ using Application.Services.Iterfaces;
 using Application.Services.Validators.Iterface;
 using Dominio.Entities;
 using Dominio.Interfaces;
+using Dominio.Models.Parameters;
 using FluentValidation;
 using MapsterMapper;
 
@@ -44,6 +45,11 @@ namespace Application.Services.Implementation
         {
             return _mapper.Map<IEnumerable<ClienteDto>>( await _repo.GetAllAsync() ) ;
             
+        }
+        public async Task<IEnumerable<ClienteFilteredDto>> GetAllFilterAsync(ClientesParameters param)
+        {
+            var query = await _repo.GetAllFilterAsync(param);
+            return _mapper.Map<IEnumerable<ClienteFilteredDto>>(query);
         }
 
         public async Task UpdateAsync(Guid Id, ClienteDto Dto, CancellationToken cancellationToken = default)

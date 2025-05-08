@@ -1,12 +1,11 @@
 ﻿using Application.Services.DTOs.Pago;
 using Application.Services.Iterfaces;
 using Dominio.Models.Parameters;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AppGestionPeloteros.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     public class PagosController(IPagosService _service) : Controller
     {
